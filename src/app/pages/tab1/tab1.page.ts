@@ -17,11 +17,4 @@ export class Tab1Page implements OnInit {
 
   recentMovies: Movie[] = [];
 
-  slideOpts = {
-    slidesPerView: 1.2,
-    freeMode: true
-  }
-
-
-
 }
