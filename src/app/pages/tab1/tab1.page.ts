@@ -12,9 +12,23 @@ export class Tab1Page implements OnInit {
   constructor( private movieService: MoviesService) {}
   ngOnInit() { 
     this.movieService.getFeature()
-      .then( res => this.recentMovies = res.results);
+      .then( res => this.recentMovies.push( ...res.results ) );
+
+    this.getPopular(this.popTop);
+    this.getPopular(this.popBottom);
   }
 
   recentMovies: Movie[] = [];
+  popTop: Movie[] = [];
+  popBottom: Movie[] = [];
+
+  sendPopTop = () => this.getPopular(this.popTop);
+  sendPopBottom = () => this.getPopular(this.popBottom);
+
+
+  private getPopular = async (arr: Movie[]) => {
+    await this.movieService.getPopular()
+      .then( res => arr.push( ...res.results ) );
+  }
 
 }

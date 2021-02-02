@@ -13,6 +13,8 @@ const { API, APIKEY } = environment;
 export class MoviesService {
   constructor(private http: HttpClient) { }
 
+  private popPage:number = 0;
+
   private doQuery = <T>(query:string) => {
     query = `${API}${query}&api_key=${APIKEY}`;
     return this.http.get<T>(query).toPromise();
@@ -26,5 +28,11 @@ export class MoviesService {
     const to   = `primary_release_date.lte=${end}`;
 
     return this.doQuery<MDBResp>(`/discover/movie/?${from}&${to}`);
+  }
+
+  getPopular = () => {
+    this.popPage++;
+    const query = `/discover/movie?sort_by=popularity.desc&page=${this.popPage}`
+    return this.doQuery<MDBResp>(query);
   }
 }

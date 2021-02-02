@@ -1,0 +1,24 @@
+<ion-slides 
+  [options]="slideOpts"
+  (ionSlideReachEnd)="emitTop()">
+  <ion-slide 
+    *ngFor="let movie of popTop">
+
+    <ion-card mode="ios">
+      <img [src]="movie.poster_path | imagen" />
+    </ion-card>
+
+  </ion-slide>
+</ion-slides>
+
+<ion-slides 
+  [options]="slideOpts"
+  (ionSlideReachEnd)="emitBottom()">
+  <ion-slide 
+    *ngFor="let movie of popBottom">
+
+    <ion-card mode="ios">
+      <img [src]="movie.poster_path | imagen" />
+    </ion-card>
+  </ion-slide>
+</ion-slides>
