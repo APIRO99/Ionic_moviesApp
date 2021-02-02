@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true">
+
+  <ion-slides [options]="slideOpts">
+    <ion-slide 
+      *ngFor="let movie of recentMovies">
+
+      <ion-card>
+        <img [src]="movie.backdrop_path | imagen" />
+      </ion-card>
+
+    </ion-slide>
+  </ion-slides>
+
+</ion-content>
