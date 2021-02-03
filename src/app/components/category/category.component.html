@@ -1,0 +1,12 @@
+<div 
+  *ngFor="let category of genres | groupGender:this.movies">
+  
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>{{  category.name  }}</ion-col>
+    </ion-row>
+  </ion-grid>
+  
+  <app-slideshow-poster [movies]="category.movies"></app-slideshow-poster>
+
+</div>

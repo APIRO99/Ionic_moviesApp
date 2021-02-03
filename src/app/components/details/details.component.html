@@ -91,12 +91,20 @@
       </ion-button>
     </ion-buttons>
 
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="!isFavorite">
       <ion-button (click)="toggleFav()">
-        <ion-label>Favorite</ion-label>
-        <ion-icon color="warning" slot="start" name="star-outline"></ion-icon>
+        <ion-label>Add Favorite</ion-label>
+        <ion-icon color="warning" slot="end" name="star-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
+
+    <ion-buttons slot="end" *ngIf="isFavorite">
+      <ion-button (click)="toggleFav()">
+        <ion-label>Favorite</ion-label>
+        <ion-icon color="warning" slot="end" name="star"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
 
 
 

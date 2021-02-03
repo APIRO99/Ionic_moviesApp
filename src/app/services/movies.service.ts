@@ -1,9 +1,9 @@
+import { Actors, GenreRes, MDBResp, MovieDetails, SearchResult } from 'src/app/interfaces';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import * as moment from 'moment';
-import { Actors, MDBResp, MovieDetails } from 'src/app/interfaces';
 import { environment } from 'src/environments/environment';
 
+import * as moment from 'moment';
 const { API, APIKEY } = environment;
 
 
@@ -42,5 +42,13 @@ export class MoviesService {
 
   getActors = (id: string) => {
     return this.doQuery<Actors>(`/movie/${id}/credits?a=1`)
+  }
+
+  searchMovie = (title: string) => {
+    return this.doQuery<SearchResult>(`/search/movie?query=${title}`)
+  }
+
+  getGenres = () => {
+    return this.doQuery<GenreRes>(`/genre/movie/list?a=1`)
   }
 }

@@ -57,6 +57,10 @@ export interface Spokenlanguage {
   name: string;
 }
 
+export interface GenreRes {
+  genres: Genre[];
+}
+
 export interface Genre {
   id: number;
   name: string;
@@ -96,4 +100,18 @@ export interface Cast {
   character: string;
   credit_id: string;
   order: number;
+}
+
+
+
+export interface SearchResult {
+  page: number;
+  results: Movie[];
+  total_pages: number;
+  total_results: number;
+}
+
+export interface Category {
+  name: string,
+  movies: MovieDetails[]
 }
