@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
-import { MDBResp } from 'src/app/interfaces';
+import { Actors, MDBResp, MovieDetails } from 'src/app/interfaces';
 import { environment } from 'src/environments/environment';
 
 const { API, APIKEY } = environment;
@@ -34,5 +34,13 @@ export class MoviesService {
     this.popPage++;
     const query = `/discover/movie?sort_by=popularity.desc&page=${this.popPage}`
     return this.doQuery<MDBResp>(query);
+  }
+
+  getDetails = (id: string) => {
+    return this.doQuery<MovieDetails>(`/movie/${id}?a=1`)
+  }
+
+  getActors = (id: string) => {
+    return this.doQuery<Actors>(`/movie/${id}/credits?a=1`)
   }
 }

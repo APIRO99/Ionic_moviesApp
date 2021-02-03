@@ -1,0 +1,104 @@
+<ion-content *ngIf="details && actors">
+
+  <ion-label class="titulo">
+    <h1>{{  details.title  }}</h1>
+  </ion-label>
+
+  <img  [src]="details.backdrop_path | imagen"  alt="movie backdrop path">
+
+  <ion-grid fixed>
+    <ion-row>
+      
+      <ion-col 
+        class="poster-detalle-sobre"
+        size="4">
+        <ion-card mode="ios">
+          <img [src]="details.poster_path | imagen" class="poster" alt="Movie Poster">
+        </ion-card>
+      </ion-col>
+      
+      <ion-col>
+        <ion-item>
+          <ion-icon slot="start" color="primary" name="thumbs-up"></ion-icon>
+          <ion-label>Rating</ion-label>
+          <ion-note slot="end" color="primary">{{  details.vote_average  }}</ion-note>
+        </ion-item>
+
+        <ion-item>
+          <ion-icon slot="start" color="primary" name="person"></ion-icon>
+          <ion-label>Votes</ion-label>
+          <ion-note slot="end" color="primary">{{  details.vote_count  }}</ion-note>
+        </ion-item>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+
+  <ion-grid fixed>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-label>{{  details.overview | slice: 0: showText  }}...</ion-label>
+        <ion-label 
+          *ngIf="showText !== details.overview.length"  color="primary"
+          (click)="readMore()">
+          Read More!</ion-label>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="12">
+        <ion-chip 
+          *ngFor="let gen of details.genres"
+          color="primary" outline="true">
+          <ion-label>{{  gen.name  }}</ion-label>
+        </ion-chip>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col><ion-label>Actors</ion-label></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-slides  [options]="slideOpts"  mode="ios" >
+    <ion-slide
+      *ngFor="let actor of actors.cast">
+      <ion-card class="card-actor">
+        <img *ngIf="actor.profile_path"  [src]="actor.profile_path | imagen"  [alt]="actor.name.concat">
+        <img *ngIf="!actor.profile_path" src="./assets/no-avatar.jpg"  [alt]="actor.name.concat">
+        <ion-card-subtitle>{{  actor.name  }}</ion-card-subtitle>
+      </ion-card>
+    </ion-slide>
+  </ion-slides>
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+
+    <ion-buttons slot="start">
+      <ion-button (click)="back()">
+        <ion-icon color="primary" slot="start" name="arrow-back-outline"></ion-icon>
+        <ion-label color="primary">Back</ion-label>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="toggleFav()">
+        <ion-label>Favorite</ion-label>
+        <ion-icon color="warning" slot="start" name="star-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+
+
+  </ion-toolbar>
+</ion-footer>

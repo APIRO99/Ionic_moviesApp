@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { Movie } from 'src/app/interfaces';
+import { DetailsComponent } from '../details/details.component';
 
 @Component({
   selector: 'app-slideshow-pairs',
@@ -7,7 +9,7 @@ import { Movie } from 'src/app/interfaces';
   styleUrls: ['./slideshow-pairs.component.scss'],
 })
 export class SlideshowPairsComponent implements OnInit {
-  constructor() { }
+  constructor(private modalCtrl: ModalController) { }
   ngOnInit() {  }
 
   @Input() popTop: Movie[] = [];
@@ -23,5 +25,14 @@ export class SlideshowPairsComponent implements OnInit {
 
   emitTop = () => this.requestPopTop.emit();
   emitBottom = () => this.requestPopBottom.emit();
+
+  showDetails = async (id: string) => {
+    const modal = await this.modalCtrl.create({
+      component: DetailsComponent,
+      componentProps: { id }
+    });
+
+    modal.present();
+  }
 
 }

@@ -1,10 +1,11 @@
 <ion-slides 
   [options]="slideOpts"
+  *ngIf="popTop"
   (ionSlideReachEnd)="emitTop()">
   <ion-slide 
     *ngFor="let movie of popTop">
 
-    <ion-card mode="ios">
+    <ion-card mode="ios" (click)="showDetails( movie.id )">
       <img [src]="movie.poster_path | imagen" />
     </ion-card>
 
@@ -13,11 +14,12 @@
 
 <ion-slides 
   [options]="slideOpts"
+  *ngIf="popBottom"
   (ionSlideReachEnd)="emitBottom()">
   <ion-slide 
     *ngFor="let movie of popBottom">
 
-    <ion-card mode="ios">
+    <ion-card mode="ios" (click)="showDetails( movie.id )">
       <img [src]="movie.poster_path | imagen" />
     </ion-card>
   </ion-slide>
